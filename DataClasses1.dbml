@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Countries" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Countries;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False" SettingsObjectName="CountrieLinq.Properties.Settings" SettingsPropertyName="CountriesConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Countries" Member="Countries">
+    <Type Name="Countries">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CountryName" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Population" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Area" Type="System.Decimal" DbType="Decimal(10,2)" CanBeNull="true" />
+      <Column Name="Continent" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="Countries_Cities" Member="Cities" ThisKey="Id" OtherKey="CountryId" Type="Cities" />
+      <Association Name="Countries_Capitals" Member="Capitals" ThisKey="Id" OtherKey="CountryId" Type="Capitals" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Cities" Member="Cities">
+    <Type Name="Cities">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CountryId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CityName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="CityPopulation" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Countries_Cities" Member="Countries" ThisKey="CountryId" OtherKey="Id" Type="Countries" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Capitals" Member="Capitals">
+    <Type Name="Capitals">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CountryId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CapitalName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="CapitalPopulation" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Countries_Capitals" Member="Countries" ThisKey="CountryId" OtherKey="Id" Type="Countries" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>
